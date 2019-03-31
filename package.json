@@ -1,0 +1,16 @@
+{
+  "name": "video-genres-api",
+  "version": "1.0.0",
+  "description": "sample api on of movie genres using nodejs and express",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Jeremy L. Brien",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "joi": "^14.3.1"
+  }
+}
