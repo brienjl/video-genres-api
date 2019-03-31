@@ -26,7 +26,7 @@ app.listen(port, () => console.log(`listening on port ${port}...`));
 /*
 ** GET requests
 ** GET All movie genres
-** GET A genres by it's id
+** GET A genre by it's id
 */
 
 //GET All movie genres
@@ -63,6 +63,39 @@ app.post('/api/genres', (req, res) => {
     genres.push(genre);
     res.send(genre);
 });
+
+//PUT: Update an existing Genre
+app.put('/api/genres/:id', (req, res) => {
+
+    //LOOKUP
+    const genre = genres.find(c => c.id === parseInt(req.params.id));
+
+    //VALIDATE
+    //if genre isn't foumd, return 404 - not found
+    if (!genre) return res.status(404).send('Movie genre not found');
+
+    //if genre is found but name is not valid -- show us why
+    const { error } = validateGenre(req.body);
+    if (error) return res.status(400).send(result.error.details[0].message);
+});
+
+//DELETE: Delete an existing movie Genre
+app.delete('/api/genres/:id', (req, res) => {
+
+    //LOOKUP
+    const genre = genres.find(c => c.id === parseInt(req.params.id));
+
+    //VALIDATE
+    //if the genre doesn't exist, return 404 - not found
+    if (!genre) return res.status(404).send('Movie Genre not found');
+
+    //DELETE
+    const index = genres.indexOf(genre);
+    genres.splice(index, 1);
+
+    //RETURN the course that was deleted 
+    res.send(genre);
+})
 
 
 
